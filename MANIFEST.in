@@ -1,0 +1,7 @@
+include tree_dash_component/tree_dash_component.min.js
+include tree_dash_component/tree_dash_component.min.js.map
+include tree_dash_component/metadata.json
+include tree_dash_component/package-info.json
+include README.md
+include LICENSE
+include package.json
