@@ -16,7 +16,9 @@
   "author": "Matthias Lochbrunner <matthias_lochbrunner@web.de>",
   "license": "MIT",
   "dependencies": {
-    "ramda": "^0.26.1"
+    "core-js": "^3.3.5",
+    "ramda": "^0.26.1",
+    "regenerator-runtime": "^0.13.3"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
