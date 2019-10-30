@@ -14,7 +14,7 @@ function* traverse_bfs(node) {
     while (odd.length > 0) {
         yield odd;
         while (odd.length > 0) {
-            const { node } = odd.pop();
+            const { node } = odd.shift();
             ++id;
             even.push(...(node.childs.map(c => ({ node: c, id }))));
         }
@@ -23,7 +23,7 @@ function* traverse_bfs(node) {
 
         yield even;
         while (even.length > 0) {
-            const { node } = even.pop()
+            const { node } = even.shift()
             ++id;
             odd.push(...(node.childs.map(c => ({ node: c, id }))));
         }
@@ -39,13 +39,8 @@ function calcDepth(node) {
             max_depth = depth;
         stack.push(...(node.childs.map(node => ({ node, depth: depth + 1 }))));
     }
-
-    // while (node) {
-    //     node = node.childs[0];
-    //     max_depth += 1;
-    // }
     return max_depth;
-};
+}
 
 function padding(a, b) {
     const PADDING = 10;

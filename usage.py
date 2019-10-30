@@ -18,7 +18,7 @@ class Node:
 
 
 node = Node('a', [Node('b', [Node('e'), Node('f')]),
-                  Node('c', [Node('g'), Node('h', [Node('x', [Node('y')])])])])
+                  Node('c', [Node('g', [Node('x')]), Node('h')])])
 
 
 app.layout = html.Div([
