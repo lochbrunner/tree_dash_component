@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-treeDashComponent <- function(id=NULL, label=NULL, value=NULL) {
+treeDashComponent <- function(id=NULL, symbol=NULL) {
     
-    props <- list(id=id, label=label, value=value)
+    props <- list(id=id, symbol=symbol)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ treeDashComponent <- function(id=NULL, label=NULL, value=NULL) {
         props = props,
         type = 'TreeDashComponent',
         namespace = 'tree_dash_component',
-        propNames = c('id', 'label', 'value'),
+        propNames = c('id', 'symbol'),
         package = 'treeDashComponent'
         )
 

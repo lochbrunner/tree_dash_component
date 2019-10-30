@@ -16,7 +16,6 @@ function* traverse_bfs(node) {
         while (odd.length > 0) {
             const { node } = odd.pop();
             ++id;
-            // console.log(`odd: ${node.ident}`)
             even.push(...(node.childs.map(c => ({ node: c, id }))));
         }
         if (even.length < 1)
@@ -26,19 +25,26 @@ function* traverse_bfs(node) {
         while (even.length > 0) {
             const { node } = even.pop()
             ++id;
-            // console.log(`even: ${node.ident}`)
             odd.push(...(node.childs.map(c => ({ node: c, id }))));
         }
     }
 }
 
 function calcDepth(node) {
-    let depth = 0;
-    while (node) {
-        node = node.childs[0];
-        depth += 1;
+    let max_depth = 0;
+    const stack = [{ node, depth: 1 }];
+    while (stack.length > 0) {
+        const { node, depth } = stack.pop();
+        if (depth > max_depth)
+            max_depth = depth;
+        stack.push(...(node.childs.map(node => ({ node, depth: depth + 1 }))));
     }
-    return depth;
+
+    // while (node) {
+    //     node = node.childs[0];
+    //     max_depth += 1;
+    // }
+    return max_depth;
 };
 
 function padding(a, b) {
@@ -73,7 +79,7 @@ function create_image(symbol) {
             if (id in dict) {
                 // Draw line
                 const p = dict[id];
-                edges.push(<line key={i} {...padding(p, { x, y })} stroke="black" strokeWidth="2" />);
+                edges.push(<line key={i} {...padding(p, { x, y })} stroke="black" strokeWidth="1.2" />);
             }
             x += dx;
         }
@@ -89,28 +95,15 @@ function create_image(symbol) {
     return image;
 }
 
-/**
- * ExampleComponent is an example component.
- * It takes a property, `label`, and
- * displays it.
- * It renders an input with the property `value`
- * which is editable by the user.
- */
 export default class TreeDashComponent extends Component {
     render() {
-        const { id, label, setProps, value } = this.props;
+        const { id, symbol } = this.props;
 
-        const symbol = { ident: 'a', childs: [{ ident: 'b', childs: [] }, { ident: 'c', childs: [] }] };
         const image = create_image(symbol);
 
         return (
             <div id={id}>
-                ExampleComponent: {label}&nbsp;
                 {image}
-                <input
-                    value={value}
-                    onChange={e => setProps({ value: e.target.value })}
-                />
             </div>
         );
     }
@@ -123,20 +116,6 @@ TreeDashComponent.propTypes = {
      * The ID used to identify this component in Dash callbacks.
      */
     id: PropTypes.string,
-
-    /**
-     * A label that will be printed when this component is rendered.
-     */
-    label: PropTypes.string.isRequired,
-
-    /**
-     * The value displayed in the input.
-     */
-    value: PropTypes.string,
-
-    /**
-     * Dash-assigned callback that should be called to report property changes
-     * to Dash, to make them available for callbacks.
-     */
+    symbol: PropTypes.object,
     setProps: PropTypes.func
 };
