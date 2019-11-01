@@ -25,12 +25,12 @@ module.exports = (env, argv) => {
     }
 
     let filename = (overrides.output || {}).filename;
-    if(!filename) {
+    if (!filename) {
         const modeSuffix = mode === 'development' ? 'dev' : 'min';
         filename = `${dashLibraryName}.${modeSuffix}.js`;
     }
 
-    const entry = overrides.entry || {main: './src/lib/index.js'};
+    const entry = overrides.entry || { main: './src/lib/index.js' };
 
     const devtool = overrides.devtool || 'source-map';
 
@@ -57,22 +57,19 @@ module.exports = (env, argv) => {
                 {
                     test: /\.jsx?$/,
                     exclude: /node_modules/,
-                    use: {
-                        loader: 'babel-loader',
-                    },
+                    use: 'babel-loader',
                 },
                 {
-                    test: /\.css$/,
+                    test: /\.s?css$/,
                     use: [
                         {
                             loader: 'style-loader',
                             options: {
-                                insertAt: 'top'
+                                injectType: 'styleTag'
                             }
                         },
-                        {
-                            loader: 'css-loader',
-                        },
+                        'css-loader',
+                        'sass-loader'
                     ],
                 },
             ],

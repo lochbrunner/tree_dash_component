@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+import './style.scss';
+
 
 function* traverse_bfs(node) {
     // Return line by line
@@ -82,7 +84,7 @@ function create_image(symbol) {
     }
 
     const image = <svg width={WIDTH} height={HEIGHT}>
-        <rect x="0" y="0" width={WIDTH} height={HEIGHT} fill="#eee" />
+        <rect x="0" y="0" width={WIDTH} height={HEIGHT} fill="#fafafa" />
         {points}
         {edges}
     </svg>;
